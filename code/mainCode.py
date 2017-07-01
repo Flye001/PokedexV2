@@ -103,8 +103,7 @@ def startMenu():
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				mouse_pos = event.pos
 				if pokedexPos.collidepoint(mouse_pos):
-					print('Pokedex Mode Activated')
-					sys.exit()
+					pokedexMenu()
 				if cameraPos.collidepoint(mouse_pos):
 					print('Camera GO!!!')
 					sys.exit()
