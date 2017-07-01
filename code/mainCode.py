@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((800,480))
 
 def startScreen():
-	startScreen = pics+'startScreen.png'
+	startScreen = pics+'start-screen.png'
 	startScreenPNG = pygame.image.load(startScreen).convert_alpha()
 	screen.blit(startScreenPNG, (0,0))
 	pygame.display.update()
