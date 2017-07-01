@@ -5,7 +5,7 @@ import sys
 pics = '/home/pi/PokedexV2/pics/'
 black = (0,0,0)
 pygame.init()
-screen = pygame.display.set_mode((800,480))
+screen = pygame.display.set_mode((800,480), pygame.FULLSCREEN)
 
 def startScreen():
 	screen.fill(black)
