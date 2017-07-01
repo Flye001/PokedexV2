@@ -6,6 +6,9 @@ pics = '/home/pi/PokedexV2/pics/'
 black = (0,0,0)
 pygame.init()
 screen = pygame.display.set_mode((800,480), pygame.FULLSCREEN)
+back = pics+'back.png'
+backPNG = pygame.image.load(back).convert_alpha()
+backPos = pygame.Rect(60, 367, 268, 71)
 
 def startScreen():
 	screen.fill(black)
@@ -56,13 +59,53 @@ def mainMenu():
 				mouse_pos = event.pos
 				#print mouse_pos
 				if startPos.collidepoint(mouse_pos):
-					print('Starting...')
-					sys.exit()
+					startMenu()
 				if creditPos.collidepoint(mouse_pos):
 					print('Credits:')
 					sys.exit()
 				if exitPos.collidepoint(mouse_pos):
-					print('bye')
 					sys.exit()
-	
+
+def startMenu():
+	screen.fill(black)
+	#define pics
+	background = pics+'background.png'
+	backgroundPNG = pygame.image.load(background).convert_alpha()
+	pokedex = pics+'Pokedex.png'
+	pokedexPNG = pygame.image.load(pokedex).convert_alpha()
+	camera = pics+'camera.png'
+	cameraPNG = pygame.image.load(camera).convert_alpha()
+	#Rect some stuff
+	pokedexPos = pygame.Rect(60, 125, 268, 71)
+	cameraPos = pygame.Rect(60, 246, 268, 71)
+	#blit images
+	screen.blit(backgroundPNG, (0,0))
+	screen.blit(pokedexPNG, pokedexPos)
+	screen.blit(cameraPNG, cameraPos)
+	screen.blit(backPNG, backPos)
+	#display
+	pygame.display.update()
+	#move Rects
+	pokedexPos = pokedexPNG.get_rect()
+	pokedexPos = pokedexPos.move(60, 125)
+	cameraPos = cameraPNG.get_rect()
+	cameraPos = cameraPos.move(60, 246)
+	backPos = backPNG.get_rect()
+	backPos = backPos.move(60, 367)
+	while True:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				sys.exit()
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				mouse_pos = event.pos
+				if pokedexPos.collidepoint(mouse_pos):
+					print('Pokedex Mode Activated')
+					sys.exit()
+				if cameraPos.collidepoint(mouse_pos):
+					print('Camera GO!!!')
+					sys.exit()
+				if backPos.collidepoint(mouse_pos):
+					mainMenu()
+
 startScreen()
