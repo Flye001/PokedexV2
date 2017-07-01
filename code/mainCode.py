@@ -110,5 +110,50 @@ def startMenu():
 					sys.exit()
 				if backPos.collidepoint(mouse_pos):
 					mainMenu()
+					
+def pokedexMenu():
+	screen.fill(black)
+	#define pics
+	background = pics+'background.png'
+	backgroundPNG = pygame.image.load(background).convert_alpha()
+	database = pics+'database.png'
+	databasePNG = pygame.image.load(database).convert_alpha()
+	search = pics+'search.png'
+	searchPNG = pygame.image.load(search).convert_alpha()
+	back = pics+'back.png'
+	backPNG = pygame.image.load(back).convert_alpha()
+	#Rect some stuff
+	databasePos = pygame.Rect(60, 125, 268, 71)
+	searchPos = pygame.Rect(60, 246, 268, 71)
+	backPos = pygame.Rect(60, 367, 268, 71)
+	#blit images
+	screen.blit(backgroundPNG, (0,0))
+	screen.blit(databasePNG, databasePos)
+	screen.blit(searchPNG, searchPos)
+	screen.blit(backPNG, backPos)
+	#display
+	pygame.display.update()
+	#move Rects
+	databasePos = databasePNG.get_rect()
+	databasePos = databasePos.move(60, 125)
+	searchPos = searchPNG.get_rect()
+	searchPos = searchPos.move(60, 246)
+	backPos = backPNG.get_rect()
+	backPos = backPos.move(60, 367)
+	while True:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				sys.exit()
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				mouse_pos = event.pos
+				if databasePos.collidepoint(mouse_pos):
+					print('database')
+					sys.exit()
+				if searchPos.collidepoint(mouse_pos):
+					print('Searching...')
+					sys.exit()
+				if backPos.collidepoint(mouse_pos):
+					startMenu()
 
 startScreen()
