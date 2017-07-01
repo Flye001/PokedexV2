@@ -6,9 +6,9 @@ pics = '/home/pi/PokedexV2/pics/'
 black = (0,0,0)
 pygame.init()
 screen = pygame.display.set_mode((800,480), pygame.FULLSCREEN)
-back = pics+'back.png'
-backPNG = pygame.image.load(back).convert_alpha()
-backPos = pygame.Rect(60, 367, 268, 71)
+#back = pics+'back.png'
+#backPNG = pygame.image.load(back).convert_alpha()
+#backPos = pygame.Rect(60, 367, 268, 71)
 
 def startScreen():
 	screen.fill(black)
@@ -75,9 +75,12 @@ def startMenu():
 	pokedexPNG = pygame.image.load(pokedex).convert_alpha()
 	camera = pics+'camera.png'
 	cameraPNG = pygame.image.load(camera).convert_alpha()
+	back = pics+'back.png'
+	backPNG = pygame.image.load(back).convert_alpha()
 	#Rect some stuff
 	pokedexPos = pygame.Rect(60, 125, 268, 71)
 	cameraPos = pygame.Rect(60, 246, 268, 71)
+	backPos = pygame.Rect(60, 367, 268, 71)
 	#blit images
 	screen.blit(backgroundPNG, (0,0))
 	screen.blit(pokedexPNG, pokedexPos)
