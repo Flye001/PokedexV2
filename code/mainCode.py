@@ -109,6 +109,49 @@ def startMenu():
 					sys.exit()
 				if backPos.collidepoint(mouse_pos):
 					mainMenu()
+
+def exitMenu():
+	screen.fill(black)
+	#define pics
+	background = pics+'background.png'
+	backgroundPNG = pygame.image.load(background)
+	exit = pics+'exit.png'
+	exitPNG = pygame.image.load(exit).convert_alpha()
+	shutdown = pics+'shutdown.png'
+	shutdownPNG = pygame.image.load(shutdown).convert_alpha()
+	back = pics+'back'
+	backPNG = pygame.image.load(back).convert_alpha()
+	#Rect some stuff
+	exitPos = pygame.Rect(60, 125, 268, 71)
+        shutdownPos = pygame.Rect(60, 246, 268, 71)
+        backPos = pygame.Rect(60, 367, 268, 71)
+	#blit images
+	screen.blit(backgroundPNG, (0,0)
+	screen.blit(exitPNG, exitPos)
+	screen.blit(shutdownPNG, shutdownPos)
+	screen.blit(backPNG, backPos)
+	#display
+	pygame.display.update()
+	#move Rects
+	exitPos = exitPNG.get_pos()
+	exitPos = exitPos.move(60, 125)
+	shutdownPos = shutdownPNG.get_pos()
+	shutdownPos = shutdownPos.move(60, 246)
+	backPos = backPNG.get_pos()
+	backPos = backPos.move(60, 367)
+	while True:
+                for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+                        if event.type == pygame.MOUSEBUTTONDOWN:
+                                mouse_pos = event.pos
+				if exitPos.collidepoint(mouse_pos):
+					sys.exit()
+				if shutdownPos.collidepoint(mouse_pos):
+					os.system('shutdown now')
+				if backPos.collidepoint(mouse_pos):
+					mainMenu()
 					
 def pokedexMenu():
 	screen.fill(black)
