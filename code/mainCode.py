@@ -127,7 +127,7 @@ def exitMenu():
         shutdownPos = pygame.Rect(60, 246, 268, 71)
         backPos = pygame.Rect(60, 367, 268, 71)
 	#blit images
-	screen.blit(backgroundPNG, (0,0)
+	screen.blit(backgroundPNG, (0,0))
 	screen.blit(exitPNG, exitPos)
 	screen.blit(shutdownPNG, shutdownPos)
 	screen.blit(backPNG, backPos)
