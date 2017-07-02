@@ -231,21 +231,23 @@ def databaseMenu():
         backPos = backPos.move (60, 367)
 	pokeNum = 1
 	pokeMax = 251	#Maximum pokemon number
-	pokePos = (415,115)
+	pokePos = (420,115)
 	#pokemon no.1
 	pokemon = pokePics+'001.png'
 	pokemonPNG = pygame.image.load(pokemon).convert_alpha()
 	pokemonPNG = pygame.transform.scale(pokemonPNG, (380,380))
 	#display number
 	pygame.font.init()
-	myfont = pygame.font.SysFont("monospace", 50)
-	pokeID = myfont.render("001 - bulbasaur", 1, black)
+	myfont = pygame.font.SysFont("monospace", 45)
+	pokeName = myfont.render("bulbasaur", 1, black)
+	pokeID = myfont.render("001", 1, black)
 	#blit stuff
-	screen.blit(pokeID, (415, 75))
 	screen.blit(pokemonPNG, pokePos)
+	screen.blit(pokeName, (400, 75))
+	screen.blit(pokeID, (400, 420))
 	pygame.display.update()
 	while True:
-		pygame.draw.rect(screen,white,(415, 75, 800, 480))
+		pygame.draw.rect(screen,white,(400, 75, 800, 480))
 		#pygame.display.update()
                 for event in pygame.event.get():
                         if event.type == pygame.QUIT:
@@ -266,17 +268,25 @@ def databaseMenu():
 						pokeStr = "0" + pokeStr
 					print pokeStr
 					#print pokeNum
+					pokeFile = open('/home/pi/PokedexV2/code/pokemon.csv','r')
+					pokeName = pokeFile.readlines()[pokeNum]
+					id,name = pokeName.split(",")
+					name = name[:-2]
+					#define pics
 					pokemon = pokePics+pokeStr+'.png'
         				pokemonPNG = pygame.image.load(pokemon).convert_alpha()
         				pokemonPNG = pygame.transform.scale(pokemonPNG, (380,380))
         				#display number
         				pygame.font.init()
-        				myfont = pygame.font.SysFont("monospace", 50)
+        				myfont = pygame.font.SysFont("monospace", 45)
         				pokeID = myfont.render(pokeStr, 1, black)
+					pokeName = myfont.render(name, 1, black)
         				#blit stuff
-        				screen.blit(pokeID, (415, 75))
-        				screen.blit(pokemonPNG, pokePos)
+					screen.blit(pokemonPNG, pokePos)
+        				screen.blit(pokeID, (400, 420))
+					screen.blit(pokeName, (400, 75))
         				pygame.display.update()
+					pokeFile.close()
 				#-------------------------------------
                                 if downPos.collidepoint(mouse_pos):
                                         pokeNum = pokeNum-1
@@ -290,17 +300,25 @@ def databaseMenu():
                                                 pokeStr = "0" + pokeStr
                                         print pokeStr
 					#print pokeNum
-					pokemon = pokePics+pokeStr+'.png'
+					pokeFile = open('/home/pi/PokedexV2/code/pokemon.csv')
+                                        pokeName = pokeFile.readlines()[pokeNum]
+                                        id,name = pokeName.split(",")
+                                        name = name[:-2]
+                                        #define pics
+                                        pokemon = pokePics+pokeStr+'.png'
                                         pokemonPNG = pygame.image.load(pokemon).convert_alpha()
-                                        pokemonPNG = pygame.transform.scale(pokemonPNG, (380,380))
+                                        pokemonPNG = pygame.transform.scale(pokemonPNG, (380, 380))
                                         #display number
                                         pygame.font.init()
-                                        myfont = pygame.font.SysFont("monospace", 50)
+                                        myfont = pygame.font.SysFont("monospace", 45)
                                         pokeID = myfont.render(pokeStr, 1, black)
+                                        pokeName = myfont.render(name, 1, black)
                                         #blit stuff
-                                        screen.blit(pokeID, (415, 75))
-                                        screen.blit(pokemonPNG, pokePos)
+					screen.blit(pokemonPNG, pokePos)
+                                        screen.blit(pokeID, (400, 420))
+                                        screen.blit(pokeName, (400, 75))
                                         pygame.display.update()
+                                        pokeFile.close()
 				#----------------------------------------
                                 if backPos.collidepoint(mouse_pos):
                                         pokedexMenu()
