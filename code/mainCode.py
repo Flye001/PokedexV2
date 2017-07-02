@@ -231,7 +231,7 @@ def databaseMenu():
         backPos = backPos.move (60, 367)
 	pokeNum = 1
 	pokeMax = 251	#Maximum pokemon number
-	pokePos = (415,100)
+	pokePos = (415,115)
 	#pokemon no.1
 	pokemon = pokePics+'001.png'
 	pokemonPNG = pygame.image.load(pokemon).convert_alpha()
@@ -239,7 +239,7 @@ def databaseMenu():
 	#display number
 	pygame.font.init()
 	myfont = pygame.font.SysFont("monospace", 50)
-	pokeID = myfont.render("001", 1, black)
+	pokeID = myfont.render("001 - bulbasaur", 1, black)
 	#blit stuff
 	screen.blit(pokeID, (415, 75))
 	screen.blit(pokemonPNG, pokePos)
