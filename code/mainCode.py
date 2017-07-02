@@ -205,9 +205,9 @@ def databaseMenu():
 	#define pics
 	background = pics+'background.png'
 	backgroundPNG = pygame.image.load(background).convert_alpha()
-	up = pics+'back.png'
+	up = pics+'next.png'
 	upPNG = pygame.image.load(up).convert_alpha()
-	down = pics+'back.png'
+	down = pics+'previous.png'
 	downPNG = pygame.image.load(down).convert_alpha()
 	back = pics+'back.png'
 	backPNG = pygame.image.load(back).convert_alpha()
