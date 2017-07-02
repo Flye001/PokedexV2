@@ -65,7 +65,7 @@ def mainMenu():
 					print('Credits:')
 					sys.exit()
 				if exitPos.collidepoint(mouse_pos):
-					sys.exit()
+					exitMenu()
 
 def startMenu():
 	screen.fill(black)
