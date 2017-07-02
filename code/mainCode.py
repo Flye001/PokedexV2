@@ -1,6 +1,7 @@
 import time
 import pygame
 import sys
+import os
 
 pics = '/home/pi/PokedexV2/pics/'
 black = (0,0,0)
