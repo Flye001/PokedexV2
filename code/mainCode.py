@@ -120,7 +120,7 @@ def exitMenu():
 	exitPNG = pygame.image.load(exit).convert_alpha()
 	shutdown = pics+'shutdown.png'
 	shutdownPNG = pygame.image.load(shutdown).convert_alpha()
-	back = pics+'back'
+	back = pics+'back.png'
 	backPNG = pygame.image.load(back).convert_alpha()
 	#Rect some stuff
 	exitPos = pygame.Rect(60, 125, 268, 71)
@@ -134,11 +134,11 @@ def exitMenu():
 	#display
 	pygame.display.update()
 	#move Rects
-	exitPos = exitPNG.get_pos()
+	exitPos = exitPNG.get_Rect()
 	exitPos = exitPos.move(60, 125)
-	shutdownPos = shutdownPNG.get_pos()
+	shutdownPos = shutdownPNG.get_Rect()
 	shutdownPos = shutdownPos.move(60, 246)
-	backPos = backPNG.get_pos()
+	backPos = backPNG.get_Rect()
 	backPos = backPos.move(60, 367)
 	while True:
                 for event in pygame.event.get():
