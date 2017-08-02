@@ -64,8 +64,7 @@ def mainMenu():
 				if startPos.collidepoint(mouse_pos):
 					startMenu()
 				if creditPos.collidepoint(mouse_pos):
-					print('Credits:')
-					sys.exit()
+					credits()
 				if exitPos.collidepoint(mouse_pos):
 					exitMenu()
 
@@ -195,8 +194,7 @@ def pokedexMenu():
 				if databasePos.collidepoint(mouse_pos):
 					databaseMenu()
 				if searchPos.collidepoint(mouse_pos):
-					print('Searching...')
-					sys.exit()
+					searchMenu()
 				if backPos.collidepoint(mouse_pos):
 					startMenu()
 
@@ -322,5 +320,17 @@ def databaseMenu():
 				#----------------------------------------
                                 if backPos.collidepoint(mouse_pos):
                                         pokedexMenu()
+
+def searchMenu():
+        myfont = pygame.font.SysFont("monospace", 45)
+        WIP = myfont.render("WORK IN PROGRESS", 1, black)
+        screen.blit(WIP, (400, 210))
+        pygame.display.update()
+
+def credits():
+	myfont = pygame.font.SysFont("monospace", 45)
+	WIP = myfont.render("WORK IN PROGRESS", 1, black)
+	screen.blit(WIP, (400, 210))
+	pygame.display.update()
 
 startScreen()
