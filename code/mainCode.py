@@ -368,14 +368,65 @@ def cameraMenu():
                         if event.type == pygame.MOUSEBUTTONDOWN:
                                 mouse_pos = event.pos
                                 if capturePos.collidepoint(mouse_pos):
-                                        cameraApp()
+                                        cameraCapture()
                                 if testPos.collidepoint(mouse_pos):
                                         cameraTest()
                                 if backPos.collidepoint(mouse_pos):
                                         startMenu()
 
-def cameraApp():
-	cameraMenu()
+def cameraCapture():
+	cam.resolution = (800, 480)
+	cam.start_preview()
+	while True:
+		for event in pygame.event.get():
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				cam.capture('/home/pi/PokedexV2/Images/camera/background.png')
+				cameraMenu2()
+				cam.stop_preview()
+
+def cameraMenu2():
+        screen.fill(black)
+        #define pics
+        background = pics+'background.png'
+        backgroundPNG = pygame.image.load(background).convert_alpha()
+        #capture = pics+'capture.png'
+        #capturePNG = pygame.image.load(capture).convert_alpha()
+        #test = pics+'test.png'
+        #testPNG = pygame.image.load(test).convert_alpha()
+        #back = pics+'back.png'
+        #backPNG = pygame.image.load(back).convert_alpha()
+        #Rect some stuff
+        capturePos = pygame.Rect(60, 125, 268, 71)
+        testPos = pygame.Rect(60, 246, 268, 71)
+        backPos = pygame.Rect(60, 367, 268, 71)
+        #blit images
+        screen.blit(backgroundPNG, (0,0))
+        screen.blit(capturePNG, capturePos)
+        screen.blit(testPNG, testPos)
+        screen.blit(backPNG, backPos)
+        #display
+        pygame.display.update()
+        #move Rects
+        capturePos = capturePNG.get_rect()
+        capturePos = capturePos.move(60, 125)
+        testPos = testPNG.get_rect()
+        testPos = testPos.move(60, 246)
+        backPos = backPNG.get_rect()
+        backPos = backPos.move(60, 367)
+        while True:
+                for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+                        if event.type == pygame.MOUSEBUTTONDOWN:
+                                mouse_pos = event.pos
+                                if capturePos.collidepoint(mouse_pos):
+                                        cameraCapture()
+                                if testPos.collidepoint(mouse_pos):
+                                        cameraTest()
+                                if backPos.collidepoint(mouse_pos):
+                                        startMenu()
+
 
 def cameraTest():
 	cam.resolution = (800, 480)
@@ -383,7 +434,7 @@ def cameraTest():
 	while True:
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONDOWN:
-				cam.stop_preview()
 				cameraMenu()
+				cam.stop_preview()
 
 startScreen()
