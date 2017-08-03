@@ -488,13 +488,7 @@ def cameraMenu3simple():
 					imbg.paste(new_im, None, new_im)
 					imbg.save('/home/pi/PokedexV2/pics/camera/final.png', 'png')
 					#---------------------------
-					screen.fill(black)
-					picture = '/home/pi/PokedexV2/pics/camera/final.png'
-					picturePNG = pygame.image.load(picture).convert_alpha()
-					screen.blit(picturePNG, (0,0))
-					pygame.display.update()
-					time.sleep(5)
-					sys.exit()
+					cameraMenu4()
                                 if poke2Pos.collidepoint(mouse_pos):
                                         WIP()
                                 if poke3Pos.collidepoint(mouse_pos):
@@ -509,8 +503,8 @@ def cameraMenu4():
         previewPNG = pygame.image.load(preview).convert_alpha()
         share = pics+'share.png'
         sharePNG = pygame.image.load(share).convert_alpha()
-        dicard = pics+'dicard.png'
-        dicardPNG = pygame.image.load(dicard).convert_alpha()
+        discard = pics+'discard.png'
+        discardPNG = pygame.image.load(discard).convert_alpha()
         #Rect some stuff
         previewPos = pygame.Rect(60, 125, 268, 71)
         sharePos = pygame.Rect(60, 246, 268, 71)
@@ -542,8 +536,10 @@ def cameraMenu4():
                                         picturePNG = pygame.image.load(picture).convert_alpha()
                                         screen.blit(picturePNG, (0,0))
                                         pygame.display.update()
-                                        time.sleep(5)
-                                        sys.exit()
+                                        while True:
+						for event in pygame.event.get():
+							if event.type == pygame.MOUSEBUTTONDOWN:
+								cameraMenu4()
                                 if sharePos.collidepoint(mouse_pos):
                                         WIP()
                                 if discardPos.collidepoint(mouse_pos):
