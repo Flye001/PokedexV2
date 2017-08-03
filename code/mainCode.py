@@ -106,7 +106,7 @@ def startMenu():
 				if pokedexPos.collidepoint(mouse_pos):
 					pokedexMenu()
 				if cameraPos.collidepoint(mouse_pos):
-					cameraApp()
+					cameraMenu()
 				if backPos.collidepoint(mouse_pos):
 					mainMenu()
 
@@ -380,52 +380,55 @@ def cameraCapture():
 	while True:
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONDOWN:
-				cam.capture('/home/pi/PokedexV2/Images/camera/background.png')
-				cameraMenu2()
+				cam.capture('/home/pi/PokedexV2/pics/camera/background.png')
 				cam.stop_preview()
+				cameraMenu2()
 
 def cameraMenu2():
         screen.fill(black)
         #define pics
         background = pics+'background.png'
         backgroundPNG = pygame.image.load(background).convert_alpha()
-        #capture = pics+'capture.png'
-        #capturePNG = pygame.image.load(capture).convert_alpha()
-        #test = pics+'test.png'
-        #testPNG = pygame.image.load(test).convert_alpha()
-        #back = pics+'back.png'
-        #backPNG = pygame.image.load(back).convert_alpha()
+        cont = pics+'continue.png'
+        contPNG = pygame.image.load(cont).convert_alpha()
+        preview = pics+'preview.png'
+        previewPNG = pygame.image.load(preview).convert_alpha()
+        discard = pics+'discard.png'
+        discardPNG = pygame.image.load(discard).convert_alpha()
         #Rect some stuff
-        capturePos = pygame.Rect(60, 125, 268, 71)
-        testPos = pygame.Rect(60, 246, 268, 71)
-        backPos = pygame.Rect(60, 367, 268, 71)
+        contPos = pygame.Rect(60, 125, 268, 71)
+        previewPos = pygame.Rect(60, 246, 268, 71)
+        discardPos = pygame.Rect(60, 367, 268, 71)
         #blit images
         screen.blit(backgroundPNG, (0,0))
-        screen.blit(capturePNG, capturePos)
-        screen.blit(testPNG, testPos)
-        screen.blit(backPNG, backPos)
+        screen.blit(contPNG, contPos)
+        screen.blit(previewPNG, previewPos)
+        screen.blit(discardPNG, discardPos)
         #display
         pygame.display.update()
         #move Rects
-        capturePos = capturePNG.get_rect()
-        capturePos = capturePos.move(60, 125)
-        testPos = testPNG.get_rect()
-        testPos = testPos.move(60, 246)
-        backPos = backPNG.get_rect()
-        backPos = backPos.move(60, 367)
+        contPos = contPNG.get_rect()
+        contPos = contPos.move(60, 125)
+        previewPos = previewPNG.get_rect()
+        previewPos = previewPos.move(60, 246)
+        discardPos = discardPNG.get_rect()
+        dicardPos = discardPos.move(60, 367)
         while True:
                 for event in pygame.event.get():
-                        if event.type == pygame.QUIT:
+			if event.type == pygame.QUIT:
                                 pygame.quit()
                                 sys.exit()
                         if event.type == pygame.MOUSEBUTTONDOWN:
                                 mouse_pos = event.pos
-                                if capturePos.collidepoint(mouse_pos):
-                                        cameraCapture()
-                                if testPos.collidepoint(mouse_pos):
-                                        cameraTest()
-                                if backPos.collidepoint(mouse_pos):
-                                        startMenu()
+                                if contPos.collidepoint(mouse_pos):
+                                        cameraMenu3()
+                                if previewPos.collidepoint(mouse_pos):
+                                        screen.fill(black)
+					picture = '/home/pi/PokedexV2/pics/camera/background.png'
+					picturePNG = pygame.image.load(picture).convert_alpha()
+                                if discardPos.collidepoint(mouse_pos):
+                                        os.remove('home/pi/PokedexV2/pics/camera/background.png')
+					cameraMenu()
 
 
 def cameraTest():
@@ -434,7 +437,7 @@ def cameraTest():
 	while True:
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONDOWN:
-				cameraMenu()
 				cam.stop_preview()
+				cameraMenu()
 
 startScreen()
