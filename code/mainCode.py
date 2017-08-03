@@ -3,6 +3,7 @@ import pygame
 import sys
 import os
 from picamera import PiCamera
+from PIL import Image
 
 pics = '/home/pi/PokedexV2/pics/'
 pokePics = '/home/pi/PokedexV2/pics/pokemons/'
@@ -22,6 +23,11 @@ def startScreen():
 		for event in pygame.event.get():
 			if event.type == pygame.MOUSEBUTTONDOWN:
 				mainMenu()
+def WIP():
+        myfont = pygame.font.SysFont("monospace", 45)
+        WIP = myfont.render("WORK IN PROGRESS", 1, black)
+        screen.blit(WIP, (400, 210))
+        pygame.display.update()
 
 def mainMenu():
 	screen.fill(black)
@@ -320,16 +326,10 @@ def databaseMenu():
                                         pokedexMenu()
 
 def searchMenu():
-        myfont = pygame.font.SysFont("monospace", 45)
-        WIP = myfont.render("WORK IN PROGRESS", 1, black)
-        screen.blit(WIP, (400, 210))
-        pygame.display.update()
+	WIP()
 
 def credits():
-	myfont = pygame.font.SysFont("monospace", 45)
-	WIP = myfont.render("WORK IN PROGRESS", 1, black)
-	screen.blit(WIP, (400, 210))
-	pygame.display.update()
+	WIP()
 
 def cameraMenu():
 	screen.fill(black)
@@ -421,7 +421,7 @@ def cameraMenu2():
                         if event.type == pygame.MOUSEBUTTONDOWN:
                                 mouse_pos = event.pos
                                 if contPos.collidepoint(mouse_pos):
-                                        cameraMenu3()
+                                        cameraMenu3simple()
                                 if previewPos.collidepoint(mouse_pos):
                                         screen.fill(black)
 					picture = '/home/pi/PokedexV2/pics/camera/background.png'
@@ -437,6 +437,119 @@ def cameraMenu2():
 					#print('deleted')
 					cameraMenu()
 
+def cameraMenu3simple():
+	screen.fill(black)
+        #define pics
+        background = pics+'background.png'
+        backgroundPNG = pygame.image.load(background).convert_alpha()
+        poke1 = pics+'pokemon1.png'
+        poke1PNG = pygame.image.load(poke1).convert_alpha()
+        poke2 = pics+'pokemon2.png'
+        poke2PNG = pygame.image.load(poke2).convert_alpha()
+        poke3 = pics+'pokemon3.png'
+        poke3PNG = pygame.image.load(poke3).convert_alpha()
+        #Rect some stuff
+        poke1Pos = pygame.Rect(60, 125, 268, 71)
+        poke2Pos = pygame.Rect(60, 246, 268, 71)
+        poke3Pos = pygame.Rect(60, 367, 268, 71)
+        #blit images
+        screen.blit(backgroundPNG, (0,0))
+        screen.blit(poke1PNG, poke1Pos)
+        screen.blit(poke2PNG, poke2Pos)
+        screen.blit(poke3PNG, poke3Pos)
+        #display
+        pygame.display.update()
+        #move Rects
+        poke1Pos = poke1PNG.get_rect()
+        poke1Pos = poke1Pos.move(60, 125)
+        poke2Pos = poke2PNG.get_rect()
+        poke2Pos = poke2Pos.move(60, 246)
+        poke3Pos = poke3PNG.get_rect()
+        poke3Pos = poke3Pos.move (60, 367)
+	while True:
+                for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+                        if event.type == pygame.MOUSEBUTTONDOWN:
+                                mouse_pos = event.pos
+                                if poke1Pos.collidepoint(mouse_pos):
+					screen.fill(black)
+					myfont = pygame.font.SysFont("monospace", 150)
+					loading = myfont.render("Loading...", 1, white)
+					screen.blit(loading, (0, 190))
+					pygame.display.update()
+					#---------------------------
+                                        imbg = Image.open('/home/pi/PokedexV2/pics/camera/background.png')
+					imfg = Image.open('/home/pi/PokedexV2/pics/pokemons/025.png')
+					imfg = imfg.resize((100, 100))
+					new_im = Image.new('RGBA', (800,480))
+					new_im.paste(imfg,(400,240))
+					imbg.paste(new_im, None, new_im)
+					imbg.save('/home/pi/PokedexV2/pics/camera/final.png', 'png')
+					#---------------------------
+					screen.fill(black)
+					picture = '/home/pi/PokedexV2/pics/camera/final.png'
+					picturePNG = pygame.image.load(picture).convert_alpha()
+					screen.blit(picturePNG, (0,0))
+					pygame.display.update()
+					time.sleep(5)
+					sys.exit()
+                                if poke2Pos.collidepoint(mouse_pos):
+                                        WIP()
+                                if poke3Pos.collidepoint(mouse_pos):
+                                        WIP()
+
+def cameraMenu4():
+	screen.fill(black)
+        #define pics
+        background = pics+'background.png'
+        backgroundPNG = pygame.image.load(background).convert_alpha()
+        preview = pics+'preview.png'
+        previewPNG = pygame.image.load(preview).convert_alpha()
+        share = pics+'share.png'
+        sharePNG = pygame.image.load(share).convert_alpha()
+        dicard = pics+'dicard.png'
+        dicardPNG = pygame.image.load(dicard).convert_alpha()
+        #Rect some stuff
+        previewPos = pygame.Rect(60, 125, 268, 71)
+        sharePos = pygame.Rect(60, 246, 268, 71)
+        discardPos = pygame.Rect(60, 367, 268, 71)
+        #blit images
+        screen.blit(backgroundPNG, (0,0))
+        screen.blit(previewPNG, previewPos)
+        screen.blit(sharePNG, sharePos)
+        screen.blit(discardPNG, discardPos)
+        #display
+        pygame.display.update()
+	#move Rects
+        previewPos = previewPNG.get_rect()
+        previewPos = previewPos.move(60, 125)
+        sharePos = sharePNG.get_rect()
+        sharePos = sharePos.move(60, 246)
+        discardPos = discardPNG.get_rect()
+        discardPos = discardPos.move(60, 367)
+        while True:
+                for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                                pygame.quit()
+                                sys.exit()
+                        if event.type == pygame.MOUSEBUTTONDOWN:
+                                mouse_pos = event.pos
+                                if previewPos.collidepoint(mouse_pos):
+                                        screen.fill(black)
+                                        picture = '/home/pi/PokedexV2/pics/camera/final.png'
+                                        picturePNG = pygame.image.load(picture).convert_alpha()
+                                        screen.blit(picturePNG, (0,0))
+                                        pygame.display.update()
+                                        time.sleep(5)
+                                        sys.exit()
+                                if sharePos.collidepoint(mouse_pos):
+                                        WIP()
+                                if discardPos.collidepoint(mouse_pos):
+                                        os.remove('/home/pi/PokedexV2/pics/camera/background.png')
+					os.remove('/home/pi/PokedexV2/pics/camera/final.png')
+					cameraMenu()
 
 def cameraTest():
 	cam.resolution = (800, 480)
