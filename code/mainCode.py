@@ -412,7 +412,7 @@ def cameraMenu2():
         previewPos = previewPNG.get_rect()
         previewPos = previewPos.move(60, 246)
         discardPos = discardPNG.get_rect()
-        dicardPos = discardPos.move(60, 367)
+        discardPos = discardPos.move(60, 367)
         while True:
                 for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -426,8 +426,15 @@ def cameraMenu2():
                                         screen.fill(black)
 					picture = '/home/pi/PokedexV2/pics/camera/background.png'
 					picturePNG = pygame.image.load(picture).convert_alpha()
+					screen.blit(picturePNG, (0,0))
+					pygame.display.update()
+					while True:
+						for event in pygame.event.get():
+							if event.type == pygame.MOUSEBUTTONDOWN:
+								cameraMenu2()
                                 if discardPos.collidepoint(mouse_pos):
-                                        os.remove('home/pi/PokedexV2/pics/camera/background.png')
+					os.remove('/home/pi/PokedexV2/pics/camera/background.png')
+					#print('deleted')
 					cameraMenu()
 
 
