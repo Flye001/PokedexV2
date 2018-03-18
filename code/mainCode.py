@@ -2,6 +2,7 @@ import time
 import pygame
 import sys
 import os
+import random
 from picamera import PiCamera
 from PIL import Image
 
@@ -465,7 +466,7 @@ def cameraMenu3simple():
         poke2Pos = poke2PNG.get_rect()
         poke2Pos = poke2Pos.move(60, 246)
         poke3Pos = poke3PNG.get_rect()
-        poke3Pos = poke3Pos.move (60, 367)
+        poke3Pos = poke3Pos.move(60, 367)
 	while True:
                 for event in pygame.event.get():
                         if event.type == pygame.QUIT:
@@ -482,7 +483,7 @@ def cameraMenu3simple():
 					#---------------------------
                                         imbg = Image.open('/home/pi/PokedexV2/pics/camera/background.png')
 					imfg = Image.open('/home/pi/PokedexV2/pics/pokemons/025.png')
-					imfg = imfg.resize((100, 100))
+					imfg = imfg.resize((200, 200))
 					new_im = Image.new('RGBA', (800,480))
 					new_im.paste(imfg,(400,240))
 					imbg.paste(new_im, None, new_im)
@@ -490,9 +491,38 @@ def cameraMenu3simple():
 					#---------------------------
 					cameraMenu4()
                                 if poke2Pos.collidepoint(mouse_pos):
-                                        WIP()
+                                        screen.fill(black)
+                                        myfont = pygame.font.SysFont("monospace", 150)
+                                        loading = myfont.render("Loading...", 1, white)
+                                        screen.blit(loading, (0, 190))
+                                        pygame.display.update()
+                                        #---------------------------
+                                        imbg = Image.open('/home/pi/PokedexV2/pics/camera/background.png')
+                                        imfg = Image.open('/home/pi/PokedexV2/pics/pokemons/054.png')
+                                        imfg = imfg.resize((200, 200))
+                                        new_im = Image.new('RGBA', (800,480))
+                                        new_im.paste(imfg,(400,240))
+                                        imbg.paste(new_im, None, new_im)
+                                        imbg.save('/home/pi/PokedexV2/pics/camera/final.png', 'png')
+                                        #---------------------------
+                                        cameraMenu4()
                                 if poke3Pos.collidepoint(mouse_pos):
-                                        WIP()
+                                        screen.fill(black)
+                                        myfont = pygame.font.SysFont("monospace", 150)
+                                        loading = myfont.render("Loading...", 1, white)
+                                        screen.blit(loading, (0, 190))
+                                        pygame.display.update()
+                                        #---------------------------
+					pokePath = '/home/pi/PokedexV2/pics/pokemons/' + str(random.randint(001,251)) + '.png'
+                                        imbg = Image.open('/home/pi/PokedexV2/pics/camera/background.png')
+                                        imfg = Image.open(pokePath)
+                                        imfg = imfg.resize((200, 200))
+                                        new_im = Image.new('RGBA', (800,480))
+                                        new_im.paste(imfg,(400,240))
+                                        imbg.paste(new_im, None, new_im)
+                                        imbg.save('/home/pi/PokedexV2/pics/camera/final.png', 'png')
+                                        #---------------------------
+                                        cameraMenu4()
 
 def cameraMenu4():
 	screen.fill(black)
